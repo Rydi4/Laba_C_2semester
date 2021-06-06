@@ -1,22 +1,21 @@
-﻿#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <string.h>
-using namespace std;
 
-void cut(char* mass, int indexStart, int indexEnd);
+void reduce(char* mass, int indexStart, int indexEnd);
 char* insert(char* mass, char* mass2, int index);
 
 int main() {
 
-    char mass[] = "karamba";
-    char mass2[] = "TEST";
-    char* result = insert(mass, mass2, 2);
-    cut(result, 4, 10);
-    
+    char mass[] = "mamkakadavra";
+    char mass2[] = "TEXT2";
+    char* result = insert(mass, mass2, 4);
+    reduce(result, 4, 8);
+
     return 0;
 }
 
-char* insert(char* mass, char* mass2, int index) { // фунция для вставки 
+char* insert(char* mass, char* mass2, int index) {
 
     int size = strlen(mass) + strlen(mass2);
     char* s = (char*)malloc((size + 1) * sizeof(char));
@@ -30,12 +29,12 @@ char* insert(char* mass, char* mass2, int index) { // фунция для вст
 
     s[size] = '\0';
 
-    cout << s << endl;
+    printf("%s\n", s);
 
     return s;
 }
 
-void cut(char* mass, int indexStart, int indexEnd) { // функция для вырезки
+void reduce(char* mass, int indexStart, int indexEnd) {
 
     int size = strlen(mass) - (indexEnd - indexStart + 1);
     char* s = (char*)malloc((size + 1) * sizeof(char));
@@ -46,6 +45,6 @@ void cut(char* mass, int indexStart, int indexEnd) { // функция для в
     for (int i = indexEnd + 1; i < strlen(mass); i++)
         s[i - (indexEnd - indexStart + 1)] = mass[i];
     s[size] = '\0';
-    cout << s ;
+    printf("%s", s);
     return;
 }
