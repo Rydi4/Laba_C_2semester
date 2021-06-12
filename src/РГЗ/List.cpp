@@ -1,59 +1,84 @@
 #include "List.h"
 
-void List::addPupils() {
-	cout << "Do you want to create a Junior Student or High School Student? \n1.Junior Student\n2.High School Student\nYour choose:";
+void List::addStudent() {
+	cout << "Do you want to create a Graduate Student or Bachelor Student? \n1.Graduate Student\n2.Bachelor Student\nYour choose:";
 	int choose = chooseInt(1, 2);
-	Pupils* p = NULL;
+	Student* p = NULL;
 	int digit;
 	getchar;
 
 	if (choose == 1) {
-		JuniorStudent tmp;
-		cout << "\n\nCreate a new Pupils now.\n	Enter full name : anastasia"; 
+		GraduateStudent tmp;
+		cout << "\n\nCreate a new Student now.\n	Enter does the student have a budget ? \n1.Yes\n0.No\n\nYour choose : "; 
 
-		tmp.setFullname(check(regName));
-		cout << "	Enter age : ";
-		tmp.setAge(chooseInt(5, 16));
-		cout << "	Enter number school : ";
-		tmp.setNumberSchool(chooseInt(1, 999));
-		cout << "	Describe the positive qualities in 3 words : smart";
-		tmp.setCharac(check(regName));
-		cout << "	Enter grade : ";
-		tmp.setGrade(chooseInt(1, 9));
-		cout << "	Availability of insurance \n1.Yes\n0.No\n\nYour choose : ";
-		tmp.setInsurance(chooseInt(0, 1));;
-		cout << "	Enter exam score : ";
-		tmp.setMarkExam(chooseInt(1, 200));
-		cout << "	Have you changed school? \n1.Yes\n0.No\n\nYour choose :";
-		tmp.setChangeSchool(chooseInt(0, 1));
+		tmp.setBudget(chooseInt(0, 1));
+		cout << "	Enter name student : ";
+		tmp.setNameStudent(check(regName));
+		cout << "	Enter name curator : ";
+		tmp.setNameCurator(check(regName));
+		cout << "	Enter group :";
+		tmp.setGroup(check(regGroup));
+		cout << "	Enter year of entry: ";
+		tmp.setYearOfEntry(chooseInt(2000, 2020));
+		cout << "	Enter department building \n1.VC\n2.GAK\n3.Y1\n4.Y2\nYour choose : ";
+		tmp.setDepartmentBuilding(chooseInt(1, 4));
+		cout << "	Have you changed university? \n1.Yes\n0.No\n\nYour choose : ";
+		tmp.setChangeUniversity(chooseInt(0, 1));
+		cout << "	Enter Evi score :";
+		tmp.setMarkEvi(chooseInt(1, 200));
 		p = &tmp;
 
 	}
 	else if (choose == 2) {
-		HighSchoolStudent tmp;
-		cout << "\n\nCreate a new pupils now.\n	Enter full name : ";
+		BachelorStudent tmp;
+		cout << "\n\nCreate a new Student now.\n	Enter does the student have a budget ? \n1.Yes\n0.No\n\nYour choose : ";
 
-		tmp.setFullname(check(regName));
-		cout << "	Enter age : ";
-		tmp.setAge(chooseInt(16, 20));
-		cout << "	Enter number school : ";
-		tmp.setNumberSchool(chooseInt(1, 999));
-		cout << "	Describe the positive qualities in 3 words : ";
-		tmp.setCharac(check(regName));
-		cout << "	Enter grade : ";
-		tmp.setGrade(chooseInt(10, 12));
-		cout << "	Availability of insurance \n1.Yes\n0.No\n\nYour choose : ";
-		tmp.setInsurance(chooseInt(0, 1));
-		cout << "	Sports activities\n1.Boxing\n2.Karate\n3.Swimming\n\nYour choose :";
-		tmp.setSportsActivities(chooseInt(1, 3));
+		tmp.setBudget(chooseInt(0, 1));
+		cout << "	Enter name student : ";
+		tmp.setNameStudent(check(regName));
+		cout << "	Enter name curator : ";
+		tmp.setNameCurator(check(regName));
+		cout << "	Enter group :";
+		tmp.setGroup(check(regGroup));
+		cout << "	Enter year of entry: ";
+		tmp.setYearOfEntry(chooseInt(2000, 2020));
+		cout << "	Enter department building \n1.VC\n2.GAK\n3.Y1\n4.Y2\nYour choose : ";
+		tmp.setDepartmentBuilding(chooseInt(1, 4));
 		cout << "	Do you have additional points? \n1.Yes\n0.No\nYour choose :";
 		tmp.setAdditionalPoints(chooseInt(0, 1));
+		cout << "	Sports activities\n1.School\n2.Technical school\n3.College\n\nYour choose :";
+		tmp.setPreviousEducationalInstitution(chooseInt(1, 3));
 		
 		p = &tmp;
 	}
 	list.push_back	(p);
 }
-void List::removePupils(const int index) {
+void ListofGraduateStudent::get2018YearOfEntry() {
+	for (GraduateStudent& emp : list) {
+		if (emp.getYearOfEntry() == 2018)
+			cout << emp.print() << endl;
+	}
+}
+void ListofBachelorStudent::get2018YearOfEntry() {
+	for (BachelorStudent& emp : list) {
+		if (emp.getYearOfEntry() == 2018)
+			cout << emp.print() << endl;
+	}
+}
+void ListofBachelorStudent::getWasCollege() {
+	for (BachelorStudent& emp : list) {
+		if (emp.getPreviousEducationalInstitution() == 3)
+			cout << emp.print() << endl;
+	}
+}
+
+void ListofGraduateStudent::getWasAtAnotherUniversity() {
+	for (GraduateStudent& emp : list) {
+		if (emp.getChangeUniversity() == 1)
+			cout << emp.print() << endl;
+	}
+}
+void List::removeStudent(const int index) {
 	if (!list.empty())
 		delete* (list.begin() + index);
 		list.erase(list.begin() + index);
@@ -64,36 +89,36 @@ void List::showAll() {
 		cout << list[i]->print() << endl;
 	}
 }
-void List::setPupils(const int index) {
+void List::setStudent(const int index) {
 	int choice = 0, type = 0;
 	type = list[index]->whoIAm();
 
-	cout << "Your Pupils:\n\n";
+	cout << "Your Student:\n\n";
 	cout << list[index]->print() << endl;
-	cout << "\nWhat do u want to change?\n1.NumberSchool\n2.Fullname\n3.Age\n4.Characteristic\n5.Grade\n6.Insurance\n";
+	cout << "\nWhat do u want to change?\n1.Budget\n2.NameStudent\n3.NameCurator\n4.Group\n5.Year\n6.DepartmentBuilding\n";
 
-	cout << "Your choise(1-8): ";
-	choice = chooseInt(1, 8);
+	cout << "Your choise(1-6): ";
+	choice = chooseInt(1, 6);
 
 	switch (choice)
 	{
 	case 1:
-		list[index]->setNumberSchool(chooseInt(1, 999));
+		list[index]->setBudget(chooseInt(0, 1));
 		break;
 	case 2:
-		list[index]->setFullname(check(regName));
+		list[index]->setNameStudent(check(regName));
 		break;
 	case 3:
-		list[index]->setAge(chooseInt(5, 20));
+		list[index]->setNameCurator(check(regName));
 		break;
 	case 4:
-		list[index]->setCharac(check(regName));
+		list[index]->setGroup(check(regGroup));
 		break;
 	case 5:
-		list[index]->setGrade(chooseInt(1, 12));
+		list[index]->setYearOfEntry(chooseInt(2000, 2020));
 		break;
 	case 6:
-		list[index]->setInsurance(!list[index]->getInsurance());
+		list[index]->setDepartmentBuilding(!list[index]->getDepartmentBuilding());
 		break;
 		
 	}
@@ -101,20 +126,20 @@ void List::setPupils(const int index) {
 void List::clear() {
 	if (!list.empty()) {
 		for (int i = list.size(); i > 0; i--) {
-			removePupils(i - 1);
+			removeStudent(i - 1);
 		}
 	}
 }
-Pupils& List::getPupils(const int index) {
+Student& List::getStudent(const int index) {
 	return *(list[index]);
 }
-Pupils& List::getPupilsGrade(const int grade) {
+Student& List::getStudentYearOfEntry(const int yearOfEntry) {
 	for (int i = 0; i < list.size(); i++) {
-		if (list[i]->getGrade() == grade)
+		if (list[i]->getYearOfEntry() == yearOfEntry)
 			return *(list[i]);
 	}
 }
-void List::sortGrade() {
+void List::sortYearOfEntry() {
 	cout << "\nSelect sorting type: \n1. Ascending \n2. Descending \n	Your choose:";
 	int type = chooseInt(1, 2);
 
@@ -129,7 +154,7 @@ void List::sortGrade() {
 int List::getSize() { 
 	return list.size();
 }
-Pupils& List::operator[](const int index) {
+Student& List::operator[](const int index) {
 	return *list[index];
 }
 
@@ -154,16 +179,16 @@ int List::chooseInt(const int start, const int end) {
 	} while (true);
 }
 void List::readFromFile() {
-	int numberSchool;
-	string fullname;
-	int age;
-	string characteristic;
-	int grade;
-	bool insurance;
-	int markExam;
-	bool changeSchool;
-	int sportsActivities;
+	bool budget;
+	string nameStudent;
+	string nameCurator;
+	string group;
+	int yearOfEntry;
+	int departmentBuilding;
+	bool changeUniversity;
+	int markEvi;
 	bool additionalPoints;
+	int previousEducationalInstitution;
 
 	std::ifstream in(filename);
 	if (in.is_open())
@@ -175,17 +200,17 @@ void List::readFromFile() {
 		in >> size;
 		list.reserve(size);
 		for (int i = 0; i < size; i++) {
-			Pupils* p = NULL;
+			Student* p = NULL;
 			in >> type;
 			if (type == 1) {
-				in >> numberSchool >> fullname >> age >> characteristic >> grade >> insurance >>  markExam >> changeSchool;
-				JuniorStudent* tmp = new JuniorStudent(numberSchool, fullname, age, characteristic, grade, insurance, markExam, changeSchool);
+				in >> budget >> nameStudent >> nameCurator >> group >> yearOfEntry >> departmentBuilding >> changeUniversity >> markEvi;
+				GraduateStudent* tmp = new GraduateStudent(budget, nameStudent, nameCurator, group, yearOfEntry, departmentBuilding, changeUniversity, markEvi);
 				p = *(&tmp);
 				list.push_back(p);
 			}
 			else if (type == 2) {
-				in >> numberSchool >> fullname >> age >> characteristic >> grade >> insurance >> sportsActivities >> additionalPoints;
-				HighSchoolStudent* tmp = new HighSchoolStudent(numberSchool, fullname, age, characteristic, grade, insurance, sportsActivities, additionalPoints);
+				in >> budget >> nameStudent >> nameCurator >> group >> yearOfEntry >> departmentBuilding >> additionalPoints >> previousEducationalInstitution;
+				BachelorStudent* tmp = new BachelorStudent(budget, nameStudent, nameCurator, group, yearOfEntry, departmentBuilding, additionalPoints, previousEducationalInstitution);
 				p = *(&tmp);	
 				list.push_back(p);
 			}
@@ -199,7 +224,7 @@ void List::writeToFile() {
 	if (out.is_open()) {
 		out << list.size() << endl;
 		for (int i = 0; i < list.size(); i++)
-			out << list[i]->whoIAm() << " " << list[i]->getNumberSchool() << " " << list[i]->getFullname() << " " << list[i]->getAge() << " " << list[i]->getCharac() << " " << list[i]->getGrade() << " " << list[i]->getInsurance() << endl;
+			out << list[i]->whoIAm() << " " << list[i]->getBudget() << " " << list[i]->getNameStudent() << " " << list[i]->getNameCurator() << " " << list[i]->getGroup() << " " << list[i]->getYearOfEntry() << " " << list[i]->getDepartmentBuilding() << endl;
 	}
 	out.close();
 }

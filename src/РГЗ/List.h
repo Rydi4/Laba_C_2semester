@@ -1,27 +1,28 @@
 #pragma once
-#include "Pupils.h"
+#include "Student.h"
 class List
 {
 private:
-	std::vector<Pupils*> list;
+	std::vector<Student*> list;
 
 public:
-	void addPupils();
-	void removePupils(const int index);
-	void setPupils(const int index);
+	void addStudent();
+	void removeStudent(const int index);
+	void setStudent(const int index);
 	void clear();
 	void showAll();
+	
 
 	int getSize();
-	Pupils& getPupils(const int index);
-	Pupils& getPupilsGrade(const int grade);
+	Student& getStudent(const int index);
+	Student& getStudentYearOfEntry(const int grade);
 
-	void sortGrade();
+	void sortYearOfEntry();
 
 	string check(regex reg);
 	int chooseInt(int start, int end);
 
-	Pupils& operator[](const int index);
+	Student& operator[](const int index);
 	friend std::ostream& operator << (std::ostream& out, const List& obj) {
 		for (int i = 0; i < obj.list.size(); i++)
 			out << obj.list[i];
@@ -33,45 +34,45 @@ public:
 	void writeToFile();
 };
 
-class ListOfJuniorStudent {
+class ListofGraduateStudent {
 private:
-	std::vector<JuniorStudent> list;
+	std::vector<GraduateStudent> list;
 
 public:
-	void addPupils(JuniorStudent& pupils);
+	void addStudent(GraduateStudent& student);
 	void addObjects();
-	void removePupils(const int index);
+	void removeStudent(const int index);
 	void showAll();
 
 	int getSize();
-	JuniorStudent& operator[](const int index);
-	JuniorStudent& getPupils(const int index);
-	JuniorStudent& getPupilsGrade(const int grade);
+	GraduateStudent& operator[](const int index);
+	GraduateStudent& getStudent(const int index);
+	GraduateStudent& getStudentBudget(const int grade);
 	string check(regex reg);
 	int chooseInt(int start, int end);
-	void getWasChangeSchool();
-
-	void get6thGradeStudent();
+		void get2018YearOfEntry();
+        void getWasAtAnotherUniversity();
+	
 
 	};
 
-class ListOfHighSchoolStudent {
+class ListofBachelorStudent {
 private:
-	std::vector<HighSchoolStudent> list;
+	std::vector<BachelorStudent> list;
 
 public:
-	void addPupils(HighSchoolStudent& pupils);
+	void addStudent(BachelorStudent& pupils);
 	void addObjects();
-	void removePupils(const int index);
+	void removeStudent(const int index);
 	void showAll();
 
 	int getSize();
-	HighSchoolStudent& operator[](const int index);
-	HighSchoolStudent& getPupils(const int index);
-	HighSchoolStudent& getPupilsGrade(const int grade);
+	BachelorStudent& operator[](const int index);
+	BachelorStudent& getStudent(const int index);
+	BachelorStudent& getStudentBudget(const int grade);
 	string check(regex reg);
 	int chooseInt(int start, int end);
-	void getWasBoxing();
-	void get6thGradeStudent();
+	void get2018YearOfEntry();
+	void getWasCollege();
 };
 
